@@ -15,7 +15,7 @@ public class TestFileReaderHelper extends TestCase {
 	private final String file = "C:\\Users\\enassre\\eclipse-workspace\\jira_parser\\FileForTestingJira.csv";
 	
 	@Before
-	public void tearUp() {
+	public void setUp() {
 		this.fr = null;
 	}
 	
@@ -44,15 +44,5 @@ public class TestFileReaderHelper extends TestCase {
 		}
 		String line = this.fr.nextLine();
 		assertFalse("Could not read from a file.", line.isEmpty());
-	}
-	
-	@Test
-	public void testGivenValidFileThenParseHeaders() {
-		try {
-			this.fr = new FileReaderHelper(this.file);
-		} catch(FileNotFoundException e) {
-			fail("FileNotFoundException not expected. " + e.getMessage() );
-		}
-		
 	}
 }

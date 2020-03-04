@@ -10,7 +10,7 @@ public enum Headers {
 		ASSIGNEE("Assignee"),
 		CREATED("Created"),
 		UPDATED("Updated"),
-		LABEL_PCPB("Labels"),
+		LABEL("Labels"),
 		DESCRIPTION("Description"),
 		EPIC_NAME("Custom field (Epic Name)"),
 		COMMENT("Comment");//can appear several times

@@ -23,7 +23,7 @@ public class Parser {
 	
 	
 	public void parse() {
-		readHeaders();
+		this.headerRowMap = readHeaders();
 		while(this.fr.hasNextLine()) {
 			processNextRow(this.fr.nextLine());
 		}		
@@ -31,19 +31,21 @@ public class Parser {
 	
 	
 	
-	public void readHeaders() {
+	public HashMap<Headers, ArrayList<Integer>> readHeaders() {
 		String[] headers = this.fr.splitBySemicolon(this.fr.nextLine());
+		HashMap<Headers, ArrayList<Integer>> headersMap =  new HashMap<Headers, ArrayList<Integer>>(); 
 		for(Headers h : Headers.values()) {
 			Integer position = 0;
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			for (String head : headers) {
-				if (head == h.label) {
+				if (head.compareTo(h.label) == 0) {
 					list.add(position);
 				}
 				position++;
 			}
-			this.headerRowMap.putIfAbsent(h, list);
+			headersMap.putIfAbsent(h, list);
 		}
+		return headersMap;
 	}
 	
 	public void processNextRow(String line) {		
@@ -61,5 +63,9 @@ public class Parser {
 		}
 			
 		this.rowInformation.put(issueID, value);	
+	}
+	
+	public void closeReader() {
+		this.fr.closeReader();
 	}
 }
